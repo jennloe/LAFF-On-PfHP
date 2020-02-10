@@ -5,6 +5,8 @@
 void dgemv_( char *, int *, int *, double *, double *, int *,
 	     double *, int *, double *, double *, int * );
 
+//dgemv_( "Transpose", &m, &n, &alpha, A, &ldA, x, &incx, &beta, y, &incy );
+
 void MyGemm( int m, int n, int k, double *A, int ldA,
 	     double *B, int ldB, double *C, int ldC )
 {
@@ -12,7 +14,7 @@ void MyGemm( int m, int n, int k, double *A, int ldA,
   double d_one = 1.0;
   
   for ( int i=0; i<m; i++ )
-    dgemv_( "Transpose", &k, &n, &d_one, B, &ldA, &alpha(  ,   ), &ldA,
-	    &d_one, &gamma(  ,  ), &ldC );
+    dgemv_( "Transpose", &k, &n, &d_one, B, &ldB, &alpha(i,0), &ldA,
+	    &d_one, &gamma(i,0), &ldC );
 }
   
